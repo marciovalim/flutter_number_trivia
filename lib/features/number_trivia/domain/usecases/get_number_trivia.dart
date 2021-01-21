@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:equatable/equatable.dart';
 
 import '../../../../core/errors/app_error.dart';
 import '../../../../core/usecases/usecase.dart';
@@ -6,17 +7,20 @@ import '../entities/number_trivia.dart';
 import '../repositories/number_trivia_repository.dart';
 
 class GetNumberTrivia extends Usecase<NumberTrivia, Params> {
-  final NumberTriviaRepository numberTriviaRepository;
+  final NumberTriviaRepository _numberTriviaRepository;
 
-  GetNumberTrivia(this.numberTriviaRepository);
+  GetNumberTrivia(this._numberTriviaRepository);
 
   Future<Either<AppError, NumberTrivia>> call(Params params) async {
-    return await numberTriviaRepository.getNumberTrivia(params.number);
+    return await _numberTriviaRepository.getNumberTrivia(params.number);
   }
 }
 
-class Params {
+class Params extends Equatable {
   final int number;
 
   Params(this.number);
+
+  @override
+  List<Object> get props => [number];
 }
