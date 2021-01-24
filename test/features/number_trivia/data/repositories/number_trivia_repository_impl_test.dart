@@ -107,6 +107,7 @@ void main() {
 
         final result = await repository.getNumberTrivia(tNumber);
 
+        verify(localDatasource.getLastCachedTrivia());
         expect(result, equals(Right(tNumberTriviaModel)));
       });
 
@@ -115,6 +116,7 @@ void main() {
 
         final result = await repository.getNumberTrivia(tNumber);
 
+        verify(localDatasource.getLastCachedTrivia());
         expect(result, isA<Left>());
         expect(result.fold(id, id), isA<CacheError>());
       });
