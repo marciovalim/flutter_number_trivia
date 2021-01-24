@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_number_trivia/core/errors/exceptions.dart';
+import 'package:flutter_number_trivia/features/number_trivia/data/models/number_trivia_model.dart';
 
 import '../../../../core/errors/errors.dart';
 import '../../../../core/platform/network_info.dart';
@@ -22,14 +24,37 @@ class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
         _networkInfo = networkInfo;
 
   @override
-  Future<Either<AppError, NumberTrivia>> getNumberTrivia(int number) {
-    // TODO: implement getNumberTrivia
-    throw UnimplementedError();
+  Future<Either<AppError, NumberTrivia>> getNumberTrivia(int number) async {
+    return await _getNumberTriviaBy(
+      () => _remoteDatasource.getNumberTrivia(number),
+    );
   }
 
   @override
-  Future<Either<AppError, NumberTrivia>> getRandomNumberTrivia() {
-    // TODO: implement getRandomNumberTrivia
-    throw UnimplementedError();
+  Future<Either<AppError, NumberTrivia>> getRandomNumberTrivia() async {
+    return await _getNumberTriviaBy(
+      () => _remoteDatasource.getRandomNumberTrivia(),
+    );
+  }
+
+  Future<Either<AppError, NumberTrivia>> _getNumberTriviaBy(
+    Future<NumberTriviaModel> Function() function,
+  ) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final numberTriviaModel = await function();
+        _localDatasource.cacheNumberTrivia(numberTriviaModel);
+        return Right(numberTriviaModel);
+      } on ServerException {
+        return Left(ServerError());
+      }
+    } else {
+      try {
+        final cachedNumberTrivia = await _localDatasource.getLastCachedTrivia();
+        return Right(cachedNumberTrivia);
+      } on CacheException {
+        return Left(CacheError());
+      }
+    }
   }
 }
