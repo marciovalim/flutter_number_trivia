@@ -4,7 +4,7 @@ import 'package:flutter_number_trivia/core/errors/exceptions.dart';
 import 'package:flutter_number_trivia/features/number_trivia/data/models/number_trivia_model.dart';
 
 import '../../../../core/errors/errors.dart';
-import '../../../../core/platform/network_info.dart';
+import '../../../../core/utils/network_info.dart';
 import '../../domain/entities/number_trivia.dart';
 import '../../domain/repositories/number_trivia_repository.dart';
 import '../datasources/number_trivia_local_datasource.dart';

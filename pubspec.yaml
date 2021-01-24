@@ -11,8 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  connectivity: ^2.0.2
   dartz: ^0.9.2
+  data_connection_checker: ^0.3.4
   equatable: ^1.2.5
   get: ^3.24.0
   http: ^0.12.2
@@ -28,7 +28,6 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-
   # fonts:
   #   - family: Schyler
   #     fonts:
