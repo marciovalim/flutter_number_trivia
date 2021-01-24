@@ -16,3 +16,7 @@ class ServerError extends AppError {
 class CacheError extends AppError {
   CacheError({String message}) : super(message);
 }
+
+class InvalidFormatError extends AppError {
+  InvalidFormatError({String message}) : super(message);
+}
