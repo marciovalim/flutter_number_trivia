@@ -24,3 +24,7 @@ flutter pub get
 
 flutter run
 </pre>
+
+## License
+
+This project is under MIT License.
