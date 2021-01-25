@@ -26,7 +26,7 @@ void main() {
       when(repositoryMock.getNumberTrivia(any))
           .thenAnswer((_) async => Right(tNumberTrivia));
 
-      final result = await getNumberTrivia(Params(tNumber));
+      final result = await getNumberTrivia(GetNumberTriviaParams(tNumber));
 
       expect(result, Right(tNumberTrivia));
       verify(repositoryMock.getNumberTrivia(tNumber));

@@ -84,7 +84,7 @@ void main() {
         addGetNumberTriviaEvent();
         await untilCalled(getNumberTrivia(any));
 
-        verify(getNumberTrivia(Params(tNumber)));
+        verify(getNumberTrivia(GetNumberTriviaParams(tNumber)));
       });
 
       test('should emit error with server_error message if server error', () {

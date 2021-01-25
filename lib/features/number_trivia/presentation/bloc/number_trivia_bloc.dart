@@ -50,7 +50,8 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
           yield NumberTriviaError(NUMBER_TRIVIA_INPUT_ERROR_MESSAGE);
         },
         (number) async* {
-          final eitherTrivia = await _getNumberTrivia(Params(number));
+          final eitherTrivia =
+              await _getNumberTrivia(GetNumberTriviaParams(number));
           yield* foldEitherTriviaOrError(eitherTrivia);
         },
       );
