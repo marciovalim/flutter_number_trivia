@@ -8,12 +8,12 @@ abstract class NumberTriviaEvent extends Equatable {
 }
 
 class GetNumberTriviaEvent extends NumberTriviaEvent {
-  final String number;
+  final String numberString;
 
-  GetNumberTriviaEvent(this.number);
+  GetNumberTriviaEvent(this.numberString);
 
   @override
-  List<Object> get props => [number];
+  List<Object> get props => [numberString];
 }
 
 class GetRandomNumberTriviaEvent extends NumberTriviaEvent {}
